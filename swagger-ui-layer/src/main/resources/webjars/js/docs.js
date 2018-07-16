@@ -107,11 +107,13 @@ function recursive(jsonRequired, jsonDef, definitions) {
          * 是否包含子集
          */
         if (paramJson.type == "object" || paramJson.type == "array" || paramJson.$ref != undefined) {
-            createJson(jsonDef[p], "ischild", true);
-            var chilcJsonRequired = definitions[paramJson.description].required;
-            var chilcJsonProperties = definitions[paramJson.description].properties;
-            createJson(jsonDef[p], "objects", definitions[paramJson.description]);
-            recursive(chilcJsonRequired, chilcJsonProperties, definitions)
+            if(definitions[paramJson.description]!=undefined){
+                createJson(jsonDef[p], "ischild", true);
+                var chilcJsonRequired = definitions[paramJson.description].required;
+                var chilcJsonProperties = definitions[paramJson.description].properties;
+                createJson(jsonDef[p], "objects", definitions[paramJson.description]);
+                recursive(chilcJsonRequired, chilcJsonProperties, definitions)
+            }
         } else {
             createJson(jsonDef[p], "ischild", false);
         }
