@@ -12,6 +12,7 @@
           href="webjars/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="webjars/css/global.css">
     <link rel="stylesheet" type="text/css" href="webjars/css/jquery.json-viewer.css">
+    <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>
 <script id="template" type="text/template">
@@ -239,17 +240,15 @@
         {{/if}}
     </tr>
     {{if prop.ischild}}
-    <tr>
-        <th>{{:key}} Childs<i class="layui-icon">&#xe623;</i></th>
-        <th>Properties</th>
+    <tr class="show-tr" onclick="ckshow(this)">
+        <th >{{:key}} Properties<i class="layui-icon">&#xe625;</i></th>
         <th>Type</th>
         <th>Description</th>
         <th>Required</th>
     </tr>
     {{props prop.objects.properties}}
-    <tr>
-        <td><i class="layui-icon">&#xe623;</i></td>
-        <td>{{:key}}</td>
+    <tr class="show-tr-child">
+        <td><i class="layui-icon">&#xe623;</i>{{:key}}</td>
         <td>{{:prop.type}}</td>
         <td>{{:prop.description}}</td>
         {{if prop.required}}
@@ -259,17 +258,15 @@
         {{/if}}
     </tr>
     {{if prop.ischild}}
-    <tr>
-        <th>{{:key}} Childs<i class="layui-icon">&#xe623;</i></th>
-        <th>Properties</th>
+    <tr class="show-tr" onclick="ckshow(this)">
+        <th >{{:key}} Properties<i class="layui-icon">&#xe625;</i></th>
         <th>Type</th>
         <th>Description</th>
         <th>Required</th>
     </tr>
     {{props prop.objects.properties}}
-    <tr>
-        <td><i class="layui-icon">&#xe623;</i></td>
-        <td>{{:key}}</td>
+    <tr class="show-tr-child">
+        <td><i class="layui-icon">&#xe623;</i>{{:key}}</td>
         <td>{{:prop.type}}</td>
         <td>{{:prop.description}}</td>
         {{if prop.required}}
@@ -286,8 +283,6 @@
     {{/if}}
 
     {{/props}}
-
-
 
 
 </script>
@@ -298,3 +293,13 @@
 <script src="webjars/js/jquery.json-viewer.js"></script>
 <script src="webjars/js/docs.js"></script>
 </html>
+<script>
+
+    function ckshow(that) {
+        var aNode = $(that);
+        //找到当前a节点的所有li兄弟字节点
+        var lis = aNode.nextAll(".show-tr-child");
+        //让子节点显示或隐藏
+        lis.toggle("show");
+    }
+</script>
